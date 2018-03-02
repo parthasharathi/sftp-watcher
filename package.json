@@ -1,6 +1,6 @@
 {
   "name": "sftp-watcher",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "Only for linux",
   "main": "app.js",
   "keywords": [
@@ -9,7 +9,7 @@
     "sftp",
     "watcher",
     "monitor",
-    "exec"
+    "sftp-watcher"
   ],
   "directories": {
     "lib": "lib"
