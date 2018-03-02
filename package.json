@@ -1,17 +1,33 @@
 {
-	"name": "sftp-watcher",
-	"version": "1.0.0",
-	"description": "Only for linux",
-	"main": "app.js",
-	"dependencies": {
-		"cron": "^1.3.0"
-	},
-	"keywords": [
-		"ssh",
-		"ssh2",
-		"sftp",
-		"watcher",
-		"monitor",
-		"exec"
-	]
+  "name": "sftp-watcher",
+  "version": "1.0.0",
+  "description": "Only for linux",
+  "main": "app.js",
+  "dependencies": {
+    "cron": "^1.3.0"
+  },
+  "keywords": [
+    "ssh",
+    "ssh2",
+    "sftp",
+    "watcher",
+    "monitor",
+    "exec"
+  ],
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parthasharathi/sftp-watcher.git"
+  },
+  "author": "parthasharathi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/parthasharathi/sftp-watcher/issues"
+  },
+  "homepage": "https://github.com/parthasharathi/sftp-watcher#readme"
 }
