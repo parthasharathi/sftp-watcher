@@ -1,4 +1,4 @@
-var watcher = require("./lib/watch.js"),
+var Watcher = require("./lib/watch.js"),
 EventEmitter = require('events').EventEmitter,
 dns = require('dns');
 
@@ -20,7 +20,7 @@ var api = function (config) {
 				sftpCmd = sshpassCmd + "sftp -oPort=" + config.port + " " + config.username + "@" + ipaddress + ":" + config.path || "";
 				var job = function (firstping) {
 					event.emit('heartbeat', true)
-					var watcherEvent = new watcher(sftpCmd);
+					var watcherEvent = new Watcher(sftpCmd);
 					watcherEvent.on("data", function (data) {
 						if (firstping == true) {
 							backupFileList = data;
@@ -59,11 +59,16 @@ var api = function (config) {
 						}
 					});
 				}
+				event.on("stop",function(){
+					clearInterval(timeinterval);
+					event.emit("close", "Sftp Watcher stopped");
+				});
 				job(true);
 				timeinterval = setInterval(job, 5000);
 			}
 		});
 	}
 	return event;
+
 }
 module.exports = api;

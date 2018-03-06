@@ -10,38 +10,47 @@ Configuration
 * Make sure your machine has sshpass 
 
      	sudo apt-get install sshpass
+* install package
+
+		npm install sftp-watcher
+
 Scope of Sftp-watcher.
 --------------------------------------------------------------------------
 * Light weight.
 * monitoring the directory.
+
 SampleCode
 --------------------------------------------------------------------------
 
-	var sftpwatcher=require("sftp-watcher");                             
-
-	var event=new sftpwatcher({
-		host : 'your.hostname.com',
-		port : 22,
-		username : 'username',
-		password : 'password',
-		path : 'test/'
-	});
-
-	event.on("upload",function(data){
+	var SftpWatcher = require("sftp-watcher");                  
+	
+	var event = new SftpWatcher({
+			host : 'your.hostname.com',
+			port : 22,
+			username : 'username',
+			password : 'password',
+			path : 'test/'
+		});
+		
+	event.on("upload", function (data) {
 		console.log(data)
 	});
-	event.on("delete",function(data){
+	event.on("delete", function (data) {
 		console.log(data)
 	});
-	event.on("heartbeat",function(data){
+	event.on("heartbeat", function (data) {
 		console.log(data.toString())
 	});
-	event.on("close",function(data){
+	event.on("close", function (data) {
 		console.log(data.toString())
 	});
-	event.on("error",function(data){
+	event.on("error", function (data) {
 		console.log(data.toString())
 	});
+
+    /*To stop the watcher*/
+
+    event.emit("stop");
 
 TODO:
 
