@@ -22,7 +22,7 @@ Scope of Sftp-watcher.
 SampleCode
 --------------------------------------------------------------------------
 
-	var SftpWatcher = require("sftp-watcher");                  
+	var SftpWatcher = require("sftp-watcher");                       
 	
 	var event = new SftpWatcher({
 			host : 'your.hostname.com',

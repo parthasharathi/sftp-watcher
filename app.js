@@ -17,7 +17,7 @@ var api = function (config) {
 				var uploadFilesList = [],
 				backupFileList = [],
 				sshpassCmd = (config.password) ? "sshpass -p " + config.password + " " : "",
-				sftpCmd = sshpassCmd + "sftp -oPort=" + config.port + " " + config.username + "@" + ipaddress + ":" + config.path || "";
+				sftpCmd = sshpassCmd + "sftp -o StrictHostKeyChecking=no -oPort=" + config.port + " " + config.username + "@" + ipaddress + ":" + config.path || "";
 				var job = function (firstping) {
 					event.emit('heartbeat', true)
 					var watcherEvent = new Watcher(sftpCmd);

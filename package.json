@@ -1,6 +1,6 @@
 {
   "name": "sftp-watcher",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "Only for linux",
   "main": "app.js",
   "keywords": [
