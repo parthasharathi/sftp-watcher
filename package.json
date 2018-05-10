@@ -1,8 +1,8 @@
 {
   "name": "sftp-watcher",
-  "version": "1.0.12",
-  "description": "Only for linux",
-  "main": "app.js",
+  "version": "2.0.1",
+  "description": "",
+  "main": "service.js",
   "keywords": [
     "ssh",
     "ssh2",
@@ -11,8 +11,8 @@
     "monitor",
     "sftp-watcher"
   ],
-  "directories": {
-    "lib": "lib"
+  "dependencies": {
+    "ssh2": "^0.5.4"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
