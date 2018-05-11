@@ -4,7 +4,7 @@
 <p align="">
     <img height="200" width="400" src="https://i.imgur.com/gqMIfOj.jpg">
 </p>
-		SSFTP watcher helps to monitor the SFTP directory and tigger corresponding event. It's easy to start and stop process at any time.
+		SFTP watcher helps to monitor the SFTP directory and tigger corresponding event. It's easy to start and stop process at any time.
 		
 Configuration
 --------------------------------------------------------------------------
