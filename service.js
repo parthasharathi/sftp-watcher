@@ -2,11 +2,12 @@ var EventEmitter = require('events').EventEmitter,
     Client = require('ssh2').Client;
 
 module.exports = function(config) {
-    var event = new EventEmitter(),
-        timeinterval,
-        fileWatcher;
+    var event = new EventEmitter();
+    let timeInterval;
+    let fileWatcher;
+    let folderObjList = null;
     event.on("stop", function() {
-        clearInterval(timeinterval);
+        clearInterval(timeInterval);
         event.emit("close", "SFTP watcher stopped");
     });
     if (!config.host && !config.username) {
@@ -22,6 +23,7 @@ module.exports = function(config) {
                 } else {
                     event.emit('connected', true);
                     fileWatcher(sftp, config.path);
+                    event.emit('fetchBase', true);
                 }
             });
         }).on('error', function(err) {
@@ -39,6 +41,7 @@ module.exports = function(config) {
                             objList.forEach(function(fileObj) {
                                 folderObjList[fileObj.filename] = fileObj;
                             });
+                            event.emit('startListen', true);
                         } else {
                             objList.forEach(function(fileObj) {
                                 if (!baseObjList[fileObj.filename] || (baseObjList[fileObj.filename] && fileObj.attrs.size != baseObjList[fileObj.filename].attrs.size)) {
@@ -61,7 +64,7 @@ module.exports = function(config) {
                         }
                         if (baseObjList && Object.keys(baseObjList).length != 0) {
                             Object.keys(baseObjList).forEach(function(filename) {
-                                if (!folderObjList[filename]) {
+                                if (!folderObjList[filename] && !filename.endsWith(".filepart")) {
                                     event.emit("delete", {
                                         host: config.host,
                                         user: config.username,
@@ -73,12 +76,17 @@ module.exports = function(config) {
                         }
                     }
                 });
-            },
-            folderObjList = null;
-        timeinterval = setInterval(function() {
+            };
+        event.on("startListen", function() {
+            timeInterval = setInterval(function() {
+                new job(JSON.parse(JSON.stringify(folderObjList)));
+                event.emit('heartbeat', new Date());
+            }, 2000);
+        });
+        event.on("fetchBase", function() {
             new job(JSON.parse(JSON.stringify(folderObjList)));
-            event.emit('heartbeat', new Date());
-        }, 2000);
+        });
+        
 
     };
     return event;
